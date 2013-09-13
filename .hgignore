@@ -1,0 +1,10 @@
+syntax: glob
+BitmapGraph/bin/*
+BitmapGraph/obj/*
+MageTalentSelector/bin/*
+MageTalentSelector/obj/*
+*.suo
+MageTheorycraft/bin/*
+MageTheorycraft/obj/*
+MageTheorycraftGUI/bin/*
+MageTheorycraftGUI/obj/*
