@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{640CE767-6639-4A61-86C5-77A56503FCA5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MageTheorycraft</RootNamespace>
+    <AssemblyName>MageTheorycraft</AssemblyName>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Buffs\ArcaneImpact.cs" />
+    <Compile Include="Buffs\ArcaneInstability.cs" />
+    <Compile Include="Buffs\ArcaneMeditation.cs" />
+    <Compile Include="Buffs\ArcanePotency.cs" />
+    <Compile Include="Buffs\ArcticWinds.cs" />
+    <Compile Include="Buffs\Buff.cs" />
+    <Compile Include="Buffs\ArcaneFocus.cs" />
+    <Compile Include="Buffs\ArcanePower.cs" />
+    <Compile Include="Buffs\PresenceOfMind.cs" />
+    <Compile Include="Buffs\IcyVeins.cs" />
+    <Compile Include="Buffs\MoltenFury.cs" />
+    <Compile Include="Buffs\EmpoweredFrostbolt.cs" />
+    <Compile Include="Buffs\WintersChill.cs" />
+    <Compile Include="Buffs\FrostChanneling.cs" />
+    <Compile Include="Buffs\FrozenTarget.cs" />
+    <Compile Include="Buffs\IceShards.cs" />
+    <Compile Include="Buffs\EmpoweredAM.cs" />
+    <Compile Include="Buffs\PiercingIce.cs" />
+    <Compile Include="Buffs\Shatter.cs" />
+    <Compile Include="Buffs\SpellPower.cs" />
+    <Compile Include="Buffs\WandSpec.cs" />
+    <Compile Include="Buffs\DarkmoonCrusade.cs" />
+    <Compile Include="Buffs\Clearcasting.cs" />
+    <Compile Include="Buffs\Combustion.cs" />
+    <Compile Include="Buffs\DarkmoonWrath.cs" />
+    <Compile Include="Buffs\SpellstrikeSet.cs" />
+    <Compile Include="Buffs\QuagmirransEye.cs" />
+    <Compile Include="Buffs\Incineration.cs" />
+    <Compile Include="Buffs\Pyromaniac.cs" />
+    <Compile Include="Buffs\Fireball.cs" />
+    <Compile Include="Buffs\CriticalMass.cs" />
+    <Compile Include="Buffs\ElementalPrecision.cs" />
+    <Compile Include="Buffs\EmpoweredFireball.cs" />
+    <Compile Include="Buffs\FirePower.cs" />
+    <Compile Include="Buffs\Ignite.cs" />
+    <Compile Include="Buffs\MasterOfElements.cs" />
+    <Compile Include="Buffs\PlayingWithFire.cs" />
+    <Compile Include="Buffs\Scorch.cs" />
+    <Compile Include="Buffs\T5Set4.cs" />
+    <Compile Include="Chance.cs" />
+    <Compile Include="Config.cs" />
+    <Compile Include="DPSProfile.cs" />
+    <Compile Include="Players\Player.cs" />
+    <Compile Include="Simulation.cs" />
+    <Compile Include="SpellParameter.cs" />
+    <Compile Include="LogEvent.cs" />
+    <Compile Include="Log.cs" />
+    <Compile Include="Damage.cs" />
+    <Compile Include="Players\FirePlayer.cs" />
+    <Compile Include="Players\PlayerStats.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Spells\Frostbolt.cs" />
+    <Compile Include="Spells\Wand.cs" />
+    <Compile Include="Spells\ManaGem.cs" />
+    <Compile Include="Spells\ManaPotion.cs" />
+    <Compile Include="Spells\Evocation.cs" />
+    <Compile Include="Spells\Fireball.cs" />
+    <Compile Include="Spells\Scorch.cs" />
+    <Compile Include="Spells\Spell.cs" />
+    <Compile Include="State.cs" />
+    <Compile Include="Statistics.cs" />
+    <Compile Include="Timeline.cs" />
+    <Compile Include="TimelineEvent.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

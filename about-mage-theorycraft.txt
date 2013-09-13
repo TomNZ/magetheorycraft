@@ -1,0 +1,96 @@
+TL;DR version:
+
+MageTheorycraft is an application which aims to simulate accurately what happens in WoW when a mage is casting for the duration of a boss fight. Parameters about what the mage's stats are, and what spells/talents he is using are input to the application, and a simulated combat log is displayed for the duration of the fight.
+
+Factors such as spell haste, spell hit, talents, trinkets, mana regeneration, player mana, etc etc are all taken into account. All appropriate mechanics are simulated in the same manner as they would be in-game.
+
+Get it here: http://tom.net.nz/mtc/magetheorycraft.zip
+
+
+Long version:
+
+Looking at various other theorycraft tools related to mages (spreadsheets, websites, etc) over the last few months has inspired me to take a crack at my own spin on theorycraft. The end result is MageTheorycraft, an application designed to simulate what happens when you are in a boss encounter in WoW.
+
+MTC is a work-in-progress attempt to accurately model WoW at a simple level - casting mechanics and an event-driven timeline. MTC does not offer any information such as the value of various stats, or what gear can improve your DPS. It does not hold your hand and suggest what you should improve on. But in a very real sense, you can plug in different stats, gear choices, and talent choices, and receive an accurate summary of simulated damage for a particular fight duration, in a way which I believe is relatively unique to MTC.
+
+In a nutshell (for the geeks):
+- Written in C# (.NET 2.0). While I realise I will probably cop some flak for not using C or C++, C# affords better OO control and makes for cleaner code, not to mention extremely simple UI coding.
+- Various details are plugged into the application such as player stats, available spells, fight duration, etc. A "combat log" for that fight is displayed, along with a summary of damage done.
+- MTC utilises a custom timeline class to handle all events.
+- Base classes for Spell and Buff are extended to simulate various effects (Fireball, Combustion, trinkets, talents, etc etc).
+- A single State class is used to drive the simulation. This class is initialised and run by the UI component.
+- An "AI" class is used to simulate actions a smart player would take. This can be tweaked as desired (Player.cs). At this stage it does things such as:
+  * Pop Combustion at appropriate times.
+  * Use gems, evocate and potions at appropriate times (eg. Evocation won't be popped if a rescorch is needed soon).
+  * Scorch to keep debuff up as necessary.
+  * Wand when mana drops below a certain level.
+  * Fireball if nothing else needs attention.
+  * Etc.
+- Roughly 2200 lines of code so far.
+
+What IS present in the current application:
+- An event-driven timeline (events can be slotted in at any time, and are performed in chronological order).
+- A spell framework.
+  * Cast time, mana cost, cooldown, effect delay (eg. for a fireball, which takes some time to hit its target after cast is completed), etc.
+- A buff framework.
+  * Active/passive (eg. auras are passive), duration, etc.
+  * Full support for procs off other events such as damage, spell cast, etc.
+  * Full support to influence various game mechanics, such as spell haste, mana cost, crit chance, bonus damage, etc.
+  * Passive talents implemented as passive buffs.
+- Buffs and spells both easily extensible to allow for new abilities.
+- A damage framework.
+  * Bonus damage coefficients.
+  * Damage type (fire/frost/etc, hit/crit/resist/miss).
+- Casting/non-casting mana regeneration (mp5).
+- Haste.
+- Non-zero reaction time for player actions.
+- GCD.
+- Mana gems (including a 3-charge Emerald), mana potions (an infinite supply assumed), evocation.
+
+What ISN'T present in the current application:
+- Support for classes other than mages, or specs other than the cookie-cutter fire specs. In theory such things should be as easy to add as creating more Buff/Spell classes. MTC has been built from the ground up for simulating casters however, and as such would not be suitable for simulating melee classes. It also has no in-built support for pets (although these could be represented as a buff).
+- Partial resists - a ?? boss has a 6% chance for a partial resist which isn't yet accounted for.
+- Proper support for wands - currently wands are treated as Physical damage (instead of that particular wands true damage type) so that they do not reset the 5 second rule. Wands are also affected by things such as (non-fire) crit rate, spell hit, etc, as though they were a normal spell. This may be inaccurate (but I was unable to find good information regarding wand mechanics at the time of writing the wand code). Note that wands have a bonus damage coefficient of 0 so are NOT affected by bonus damage - at least this part is accurate :P
+- A full range of spells and buffs is NOT present. I have focused on the framework at this stage (like creating a game engine, then paying designers to build the actual content later :P). For example, the following are some glaring items which are missing from the current set of spells/buffs:
+  * A range of trinkets (currently only Quagmirrans Eye is implemented).
+  * Icy Veins.
+  * Fire Blast.
+  Note that the common talents in a 10/48/3 build are accounted for - I haven't had time to fully adjust MTC to 2.3.2 yet!
+- Support for mechanics such as fight movement, or spell pushback. The fights are currently assumed to be happening under optimal conditions - 100% fight presence, no pushback or movement, no loss of character control, no range issues, etc etc.
+- I have not yet included support for buffs to influence several mechanics, particularly spell cooldowns, and passive mana regeneration (eg. for an Innervate).
+- In terms of programming/OO style, the application currently has high coupling between classes (particulary the State class - most other classes have the State object passed into their methods!). While this makes programming complex behaviours into the classes more straighforward, it exhibits poor programming practice. Any buff or spell programmed by the user has access to change any part of the simulation, which can be bad for obvious reasons. I hope to change this at some point in the future, but for now it suffices, and simplifies many complex operations. However most objects exhibit good cohesion. For example a Buff class represents a buff - nothing more, nothing less. Also, the core simulation classes are separated from the external UI classes which set up and run the simulation.
+
+Notes:
+- DOTs are not displayed in the combat log as they would be too spammy. Note that Ignite is considered a DOT, but a custom log message has been added to show it.
+- Because damage is assumed to be against a single target, buffs on the player and debuffs on the target are loosely lumped together. All damage done is assumed to be done against the target.
+- Passive talents are implemented as passive buffs.
+- Source code is commented thinly but (I hope!) concisely.
+
+To come in future versions:
+- The ability to save and load configurations to/from files.
+- The ability to pull down player stats from the Armory.
+- More meaningful output and analysis/breakdown of fight statistics (WWS-esque).
+- Better wand support.
+- Fight mechanics such as movement and pushback accounted for (to better simulate a particular fight).
+- Improved support for "non-player" actions. Ie. the actions of those around you - WOA totem, heroism, vampiric touch, drums of battle, etc etc.
+
+Above all, remember that MTC is a curiosity, and a work in progress. Like any theorycraft, take it with a grain of salt. Feel free to alter the source code in any way you wish, however if you create new buff/spell classes, or improved AI/UI, do the rest of us a favour and post them below :)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+THINGS TO DO:
+- Make State thread-safe and run the simulation in a new thread.
+- Filters for event types.
+- Make sure all events get logged correctly.
